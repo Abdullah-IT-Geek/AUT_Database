@@ -32,8 +32,9 @@ password = config["password"]
 
 
 # Datenbank initialisieren
-db = TinyDB("test.json")
+db = TinyDB("mqtt_data.json")
 
+3
 def on_connect(client, userdata, flags, reason_code, properties=None):
     if reason_code != 0:
         print(f"[ERROR] Verbindung fehlgeschlagen: {reason_code}")

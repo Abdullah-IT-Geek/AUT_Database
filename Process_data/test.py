@@ -1,11 +1,13 @@
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
-import pandas  as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.metrics import confusion_matrix, classification_report, ConfusionMatrixDisplay
 from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+
+import pandas  as pd
 import json
 import numpy as np
 import matplotlib.pyplot as plt
@@ -47,6 +49,8 @@ for table_idx, (index, row) in enumerate(drop_oscillation_df.iterrows()):
     print(table_idx, row["bottle"], row["drop_oscillation"])
     
 
+for table_idx, (index, row) in enumerate(ground_truth_df.iterrows()):
+    print(table_idx, row["bottle"], row["is_cracked"])
     
 try:
     for table_idx, (index, row) in enumerate(drop_oscillation_df.iterrows()):
@@ -67,46 +71,30 @@ except Exception as e:
 df_merged_data = pd.merge(drop_oscillation_df,ground_truth_df, on="bottle")
 
 
-df_merged_data["Mean"] = df_merged_data["drop_oscillation"].apply(np.mean)
-df_merged_data["STD"] = df_merged_data["drop_oscillation"].apply(np.std)
-df_merged_data["Minimum"] = df_merged_data["drop_oscillation"].apply(np.min)
-df_merged_data["Maximum"] = df_merged_data["drop_oscillation"].apply(np.max)
-df_merged_data["RMS"] = df_merged_data["drop_oscillation"].apply(lambda x: np.sqrt(np.mean(np.square(x))))
-df_merged_data.head()
+df_merge_data = pd.merge(drop_oscillation_df, ground_truth_df, on="bottle", how="inner")
+df_merge_data["Mean"] = df_merge_data["drop_oscillation"].apply(np.mean)
+df_merge_data["STD"] = df_merge_data["drop_oscillation"].apply(np.std)
+df_merge_data["Minimum"] = df_merge_data["drop_oscillation"].apply(np.min)
+df_merge_data["Maximum"] = df_merge_data["drop_oscillation"].apply(np.max)
+df_merge_data["Range"] = df_merge_data["Maximum"] - df_merge_data["Minimum"]
+df_merge_data["Median"] = df_merge_data["drop_oscillation"].apply(np.median)
+df_merge_data["RMS"] = df_merge_data["drop_oscillation"].apply(lambda x: np.sqrt(np.mean(np.square(x))))
+df_merge_data.head()
 
-counts, bins = np.histogram(df_merged_data["RMS"], bins="auto")
 
-# Talwert finden = Bin mit minimaler Häufigkeit zwischen den Peaks
-mask = (bins[:-1] > 0.3) & (bins[:-1] < 0.8)
-min_count_index = np.argmin(counts[mask])
 
-bins_in_range = bins[:-1][mask]
-Schwellwert = bins_in_range[min_count_index]
+feature_cols = ["RMS", "Mean", "STD", "Minimum", "Maximum","Median", "Range"]
+X = df_merge_data[feature_cols]
+Y = df_merge_data["is_cracked"]
 
-print(f"Threshold (Talwert zwischen Peaks): {Schwellwert:.3f}")
-
-# Plot zur Kontrolle
-plt.hist(df_merged_data["RMS"], bins="auto", edgecolor='black')
-plt.axvline(Schwellwert, color='red', linestyle='dashed', label=f'Threshold: {Schwellwert:.3f}')
-plt.xlabel("RMS")
-plt.ylabel("Häufigkeit")
-plt.title("Histogramm der RMS-Werte mit Threshold")
-plt.legend()
-plt.grid(True)
-plt.show()
-
-df_merged_data["is_cracked_drop_oscillation"] = df_merged_data["RMS"].apply(lambda x: 1 if x > Schwellwert else 0)
-df_merged_data.head()
-
-feature_cols = ["RMS", "Mean", "STD", "Minimum", "Maximum"]
-X = df_merged_data[feature_cols]
-Y = df_merged_data["is_cracked"]
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.25, random_state=42, stratify=Y
+    X_scaled, Y, test_size=0.3, random_state=42, stratify=Y
 )
-
 results = []
+
 
 # Modelltraining
 model_1 = LogisticRegression()
