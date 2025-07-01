@@ -239,8 +239,8 @@ Als Orientierung kann folgendes Notebook dienen:
 
 #### **Ergebnis-Tabelle**
 
-| Modell              | Train Accuracy | Test Accuracy | Train F1 | Test F1 |
-|---------------------|----------------|---------------|----------|---------|
+| Modell              | Train Accuracy | Test Accuracy | Train F1 | Test F1  |
+|---------------------|----------------|---------------|----------|----------|
 | Logistic Regression | 0.543011       | 0.5625        | 0.234234 | 0.222222 |
 | KNN                 | 0.935484       | 0.9250        | 0.454545 | 0.400000 |
 | SVC                 | 0.752688       | 0.7625        | 0.378378 | 0.424242 |
