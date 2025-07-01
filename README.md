@@ -17,7 +17,6 @@ Für den zweiten Teil des Automatisierungskurses soll ein System entwickelt werd
 
 ### 🎯 Aufgabenstellung
 
-Die Funktionalität des Programms wurde um folgende Punkte erweitert:
 
 1. **Datenübertragung des Ultraschallsensors aller Dispenser**  
    ➔ Alle 10 Sekunden werden die aktuellen Füllstände an den vorgegebenen MQTT-Broker gesendet.
@@ -252,12 +251,12 @@ Als Orientierung kann folgendes Notebook dienen:
 
 #### Ergebnis-Tabelle
 
-| Modell              | Train Accuracy | Test Accuracy | Train F1  | Test F1  |
-|---------------------|----------------|---------------|-----------|----------|
-| Logistic Regression | 0.543011       | 0.562500      | 0.234234  | 0.222222 |
-| KNN                 | 0.935484       | 0.925000      | 0.454545  | 0.400000 |
-| SVC                 | 0.752688       | 0.762500      | 0.378378  | 0.424242 |
-| Random Forest       | 1.000000       | 0.950000      | 1.000000  | 0.714286 |
+| Modell               | Train Accuracy | Test Accuracy | Train F1  | Test F1  |
+|-----------------------|----------------|---------------|-----------|----------|
+| Logistic Regression   | 0.543011       | 0.562500      | 0.234234  | 0.222222 |
+| KNN                   | 0.935484       | 0.925000      | 0.454545  | 0.400000 |
+| SVC                   | 0.752688       | 0.762500      | 0.378378  | 0.424242 |
+| Random Forest         | 0.962366       | 0.975000      | 0.800000  | 0.857143 |
 
 
 ---
