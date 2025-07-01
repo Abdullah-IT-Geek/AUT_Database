@@ -10,13 +10,12 @@ Für den zweiten Teil des Automatisierungskurses soll ein System entwickelt werd
 - [💾 Aufgabe 12.1.2 – Datenspeicherung und Visualisierung](#)
 - [📈 Aufgabe 12.3 – Regressionsmodell für Endgewicht](#)
 - [🔢 Aufgabe 12.4 – Klassifikationsmodell für defekte Flaschen](#)
-- [🏆 Fazit](#)
 
 ---
 
-## 🔄 **Aufgabe 12.1.1 – MQTT-Datenübertragung der Ultraschallsensoren (20%)**
+## 🔄 Aufgabe 12.1.1 – MQTT-Datenübertragung der Ultraschallsensoren (20%)
 
-### 🎯 **Aufgabenstellung**
+### 🎯 Aufgabenstellung
 
 Die Funktionalität des Programms wurde um folgende Punkte erweitert:
 
@@ -46,7 +45,7 @@ Die Funktionalität des Programms wurde um folgende Punkte erweitert:
 
 ---
 
-### 📑 **Abgabeformalität**
+### Abgabeformalität
 
 ✔️ Aufgabe gilt als abgeschlossen, da:
 
@@ -56,7 +55,7 @@ Die Funktionalität des Programms wurde um folgende Punkte erweitert:
 
 ---
 
-### ✅ **Ergebnisse**
+### Ergebnisse
 
 **Team:** apt-get rekt  
 - **$groupname:** apt-get rekt
@@ -68,9 +67,9 @@ Die Funktionalität des Programms wurde um folgende Punkte erweitert:
 
 ---
 
-## 💾 **Aufgabe 12.1.2 – Datenspeicherung und Visualisierung (40%)**
+## 💾 Aufgabe 12.1.2 – Datenspeicherung und Visualisierung (40%)
 
-### 🎯 **Aufgabenanforderung**
+### 🎯 Aufgabenstellung
 
 Abgabeformalien: Dokumentieren Sie ihr Vorgehen sehr kurz als gerne als Markdown-Datei.  
 In dieser Aufgabe soll ein System zur **Datenspeicherung (Warm oder Cold Storage)** und Visualisierung implementiert werden.
@@ -79,17 +78,15 @@ Datenquelle: **iot1/teaching_factory**
 
 ---
 
-### 🔧 **Umfang fürs Bestehen der Aufgabe**
+### Umfang fürs Bestehen der Aufgabe
 
-- [ ] Einfache Lösung mit CSV-Datei als Datenbank  
+- [✖️] Einfache Lösung mit CSV-Datei als Datenbank  
 - [✔️] Daten aller relevanten Topics werden vollständig und korrekt gespeichert  
 - [✔️] Python-Programm, welches eine beliebige Zeitreihe aus der Datenbank visualisiert  
 - [✔️] Report im Markdown enthält einen Plot einer ausgewählten Zeitreihe  
 - [✔️] Mindestens 15 Minuten Daten gespeichert
 
----
-
-### 🎯 **Zusatzpunkte – Erweiterungen**
+### Zusatzpunkte – Erweiterungen
 
 - [✔️] Datenbank durch TinyDB ersetzt  
 - [✔️] Plots als Dashboard mit Plotly Dash implementiert  
@@ -99,22 +96,21 @@ Datenquelle: **iot1/teaching_factory**
 
 ---
 
-### ✅ **Ergebnisse**
+### Ergebnisse
 
-✔️ **Daten erfolgreich gespeichert und visualisiert**
+✔️ **Daten erfolgreich gespeichert und visualisiert**\
+Die Datenbank im CVS-Format wurde ausgelassen, da sofot mit TinyDB eine Datenbank im JSON-Format erstellt wurde.
 
-### 📝 **config.json:**  
+### config.json:
 - **broker:** 158.180.44.197  
 - **port:** 1883  
 - **username:** bobm  
 - **password:** letmein  
 - **topic:** iot1/teaching_factory/#
 
----
+### Dashboard.py
 
-### 📊 **Dashboard.py**
-
-#### 🔧 **Funktionsweise**
+#### Funktionsweise
 
 - **Daten einlesen:**  
   Lädt alle Daten aus **mqtt_data.json** (Final Weight, Drop Oscillation, Dispenser, Temperatur).
@@ -133,11 +129,9 @@ Datenquelle: **iot1/teaching_factory**
 - **Start:**  
   Einmal starten → Dashboard öffnet sich im Browser → **Daten live und interaktiv analysierbar**
 
----
+### connect_MQTT.py
 
-### 📝 **connect_MQTT.py**
-
-#### 🔧 **Funktionen**
+#### Funktionen
 
 - **on_connect:** Verbindung herstellen & Topic abonnieren  
 - **on_disconnect:** Automatischer Reconnect bei Abbruch  
@@ -146,11 +140,10 @@ Datenquelle: **iot1/teaching_factory**
 
 ✔️ Läuft dauerhaft mit **mqttc.loop_forever()** und empfängt alle Nachrichten live.
 
----
 
-### 📈 **process.py mit Matplotlib**
+### process.py mit Matplotlib
 
-#### 🔧 **Beschreibung**
+#### Beschreibung
 
 - Liest **mqtt_data.json** ein  
 - Erstellt Subplots:
@@ -159,57 +152,77 @@ Datenquelle: **iot1/teaching_factory**
 
 ✔️ Beide Plots zeigen alle Kurven mit Legende, Achsenbeschriftung und Gitter.
 
----
 
-## 💾 **Datenbank (mqtt_data.json)**
+## Datenbank (mqtt_data.json)
 
 Die Datei **`mqtt_data.json`** dient als **zentrale Datenbank** des Projekts.  
 Alle empfangenen MQTT-Daten werden **strukturiert und dauerhaft gespeichert**, um sie für Visualisierung, Analyse und Machine Learning zu nutzen.
 
 ---
 
-## 📈 **Aufgabe 12.3 – Regressionsmodell für Endgewicht (20%)**
+## 📈 Aufgabe 12.3 – Regressionsmodell für Endgewicht (20%)
 
-### 🎯 **Aufgabenanforderung**
+Die einzelnen Schritte der Erstellung des Regressionsmodell sind im Notebook **regression.ipynb** genauer dokumentiert.
+
+### 🎯 Aufgabenstellung
 
 Erstellen Sie ein **lineares Regressionsmodell** zur Vorhersage des Endgewichts anhand aller sinnvollen Daten.  
-Ergebnis als **reg_<Matrikelnummer1-Matrikelnummer2-Matrikelnummer3>.csv**
+Ergebnis als **reg_\<Matrikelnummer1-Matrikelnummer2-Matrikelnummer3>.csv**
 
 ---
 
-### 📊 **Beispielhafte Ergebnis-Tabelle**
+### Beispielhafte Ergebnis-Tabelle
 
-| Genutzte Spalten | Modell-Typ | MSE-Wert (Training) | MSE-Wert (Test) |
-|------------------|------------|---------------------|-----------------|
-| [Drop_Mean] | Linear | 0.48 | 0.55 |
-| [Drop_Mean, Drop_STD] | Linear | 0.45 | 0.53 |
+| Genutzte Spalten                                                                                     | Modell-Typ     | MSE-Wert (Training) | MSE-Wert (Test) |
+|------------------------------------------------------------------------------------------------------|----------------|----------------------|------------------|
+| [fill_level_grams_red, fill_level_grams_blue, fill_level_grams_green]                               | Linear         | 50.2086              | 51.5616          |
+| [fill_level_grams_red, fill_level_grams_blue, fill_level_grams_green]                               | SVM            | 67.5608              | 81.0500          |
+| [fill_level_grams_red, fill_level_grams_blue, fill_level_grams_green]                               | RandomForest   | 0.1329               | 1.1385           |
+| [vibration_index_red, fill_level_grams_red, vibration_index_blue, fill_level_grams_blue, vibration_index_green, fill_level_grams_green] | Linear         | 0.1074               | 0.1132           |
+| [vibration_index_red, fill_level_grams_red, vibration_index_blue, fill_level_grams_blue, vibration_index_green, fill_level_grams_green] | SVM            | 0.1177               | 0.1206           |
+| [vibration_index_red, fill_level_grams_red, vibration_index_blue, fill_level_grams_blue, vibration_index_green, fill_level_grams_green] | RandomForest   | 0.0326               | 0.2912           |
 
----
 
-### 📐 **Beste Modellformel**
+### Beste Modellformel
 
-\[
-y = m_1 \cdot Drop\_Mean + m_2 \cdot Drop\_STD + b
-\]
+$$y = 0{,}0771 \cdot \text{vibration\_index\_red} \\
++ 0{,}0001 \cdot \text{fill\_level\_grams\_red} \\
++ 0{,}0999 \cdot \text{vibration\_index\_blue} \\
++ 0{,}0005 \cdot \text{fill\_level\_grams\_blue} \\
++ 0{,}0839 \cdot \text{vibration\_index\_green} \\
++ 0{,}0652 \cdot \text{fill\_level\_grams\_green} \\
+- 47{,}9233$$
 
-- **m₁ = 0.23**  
-- **m₂ = -0.15**  
-- **b = 42.8**
+**Parameterübersicht:**
 
----
+m₁ = 0.0771 für vibration_index_red
 
-### 🔮 **Prognose (X.csv)**
+m₂ = 0.0001 für fill_level_grams_red
 
-| Flaschen ID | y_hat |
-|-------------|-------|
-| 1 | 45.3 |
-| 2 | 43.2 |
+m₃ = 0.0999 für vibration_index_blue
+
+m₄ = 0.0005 für fill_level_grams_blue
+
+m₅ = 0.0839 für vibration_index_green
+
+m₆ = 0.0652 für fill_level_grams_green
+
+b = -47.9233
+
+
+### Prognose (X.csv)
+Die prognosse der Endgewicht mit dem gegebenen Datensatz x.csv wurde durchgeführt und als CSV-Datei `reg_52315850-52315831-62000677.csv` gespeichert.
+
+Geplottet sieht die Vorhersage folgendermasßen aus:
+![X.csv Vorhersage](Regression_Vorhersage.png)
 
 ---
 
 ## 🔢 **Aufgabe 12.4 – Klassifikationsmodell für defekte Flaschen (20%)**
 
-### 🎯 **Aufgabenstellung**
+Die einzelnen Schritte der Erstellung des Klassifiezierungsmodell sind im Notebook **classification.ipynb** genauer dokumentiert.
+
+### 🎯 Aufgabenstellung
 
 - Erstellen Sie ein **Klassifikationsmodell** zur Vorhersage von defekten Flaschen anhand der Daten aus der **Drop Vibration**.  
   Diese Daten repräsentieren eine Zeitreihe der Vibrationen von Flaschen bei der Vereinzelung.
@@ -220,24 +233,24 @@ y = m_1 \cdot Drop\_Mean + m_2 \cdot Drop\_STD + b
 
 ---
 
-### 💡 **Hinweis**
+### Hinweis
 
 Als Orientierung kann folgendes Notebook dienen:  
 **9_Classification_Python.ipynb**, welches auch im nächsten Abschnitt vorgestellt wird.
 
 ---
 
-### 📊 **Ergebnis-Tabelle**
-#### **Logistische Regression**
+### Ergebnis-Tabelle
+#### Logistische Regression
 ![Logistic Regression Confusion Matrix](Logreg.png)
-#### **KNN** 
+#### KNN 
 ![KNN Confusion Matrix](KNN.png)
-#### **SVC** 
+#### SVC 
 ![SVC Confusion Matrix](SVC.png)
-#### **Random Forest**
+#### Random Forest
 ![Random Forest Confusion Matrix](RF.png)
 
-#### **Ergebnis-Tabelle**
+#### Ergebnis-Tabelle
 
 | Modell              | Train Accuracy | Test Accuracy | Train F1  | Test F1  |
 |---------------------|----------------|---------------|-----------|----------|
