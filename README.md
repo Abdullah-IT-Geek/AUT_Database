@@ -10,7 +10,6 @@ Für den zweiten Teil des Automatisierungskurses soll ein System entwickelt werd
 - [💾 Aufgabe 12.1.2 – Datenspeicherung und Visualisierung](#)
 - [📈 Aufgabe 12.3 – Regressionsmodell für Endgewicht](#)
 - [🔢 Aufgabe 12.4 – Klassifikationsmodell für defekte Flaschen](#)
-- [🏆 Fazit](#)
 
 ---
 
@@ -18,7 +17,6 @@ Für den zweiten Teil des Automatisierungskurses soll ein System entwickelt werd
 
 ### 🎯 **Aufgabenstellung**
 
-Die Funktionalität des Programms wurde um folgende Punkte erweitert:
 
 1. **Datenübertragung des Ultraschallsensors aller Dispenser**  
    ➔ Alle 10 Sekunden werden die aktuellen Füllstände an den vorgegebenen MQTT-Broker gesendet.
